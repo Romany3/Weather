@@ -12,8 +12,8 @@ body {
   background: linear-gradient(180deg, rgba(10,20,40,0.95) 0%, rgba(40,80,120,0.9) 100%),
               url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1600&q=80')
               no-repeat center;
-  background-attachment: scroll;
-  min-height: 100dvh;
+  background-attachment: fixed;
+  min-height: 100vh;
 }
 
 /* =========================================
@@ -23,6 +23,11 @@ body {
   background: rgba(0, 0, 0, 0.35) !important;
   backdrop-filter: blur(10px);
   box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+  transition: all ease 0.4s;
+}
+
+.hidden-navbar {
+  transform: translateY(-100%);
 }
 
 .navbar-brand {
@@ -48,9 +53,11 @@ body {
 /* =========================================
    SEARCH BAR
 ========================================= */
-form.d-flex {
+
+
+.Search {
   justify-content: center;
-  margin: 40px 0;
+  margin-top: 110px;
 }
 
 form input {
@@ -73,7 +80,29 @@ form input:focus {
   box-shadow: 0 0 12px rgba(0,191,255,0.5);
 }
 
+form button {
+  border: none;
+  border-radius: 30px;
+  padding: 10px 25px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
 
+form button:hover {
+  background: rgba(0, 191, 255, 0.3);
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.6);
+  transform: scale(1.05);
+}
+
+form button:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.8);
+}
 
 form {
   display: flex;
@@ -289,6 +318,4 @@ i {
 .fa-language:hover{
   color: #00bfff !important;
   text-shadow: 0 0 8px rgba(0,191,255,0.8);
-
 }
-
