@@ -4,6 +4,7 @@ let SearchInput = document.querySelector('.SearchInput');
 let hour = document.querySelector('.weather-hour .row');
 let SearchButton = document.querySelector('.SearchButton');
 let btn = document.querySelector('.translate');
+let ArabicStyle = document.querySelectorAll('.ArabicStyle');
 
 let Home = document.querySelector('.Home');
 let News = document.querySelector('.News');
@@ -52,7 +53,8 @@ async function getCities(CityName,DisplayLang,DayNumber) {
     
     DisplayLang();
 };
-let DaysNumber = 3
+let CurrentLang = 'ar';
+let DaysNumber = 3;
 function updateButtons() {
     if (DaysNumber < 12) {
         DisplayMore.classList.remove('d-none');
@@ -65,18 +67,32 @@ function updateButtons() {
     } else {
         DisplayLess.classList.add('d-none');
     }
-}
+};
 
 DisplayMore.addEventListener('click', () => {
     DaysNumber += 3;
-    getCities('Asyut', DisplayCityEnglish, DaysNumber);
-    updateButtons();
+    if(CurrentLang=='en'){
+        getCities('Asyut', DisplayCityEnglish, DaysNumber);
+        updateButtons();
+    }
+    else{
+        getCities('Asyut', DisplayCityArabic , DaysNumber);
+        updateButtons();
+    }
+    
+    
 });
 
 DisplayLess.addEventListener('click', () => {
     DaysNumber -= 3;
-    getCities('Asyut', DisplayCityEnglish, DaysNumber);
-    updateButtons();
+    if(CurrentLang=='en'){
+        getCities('Asyut', DisplayCityEnglish, DaysNumber);
+        updateButtons();
+    }
+    else{
+        getCities('Asyut', DisplayCityArabic , DaysNumber);
+        updateButtons();
+    }
 });
 
 
@@ -87,23 +103,40 @@ SearchButton.addEventListener('click',function(e){
     e.preventDefault();
 
     let search =SearchInput.value;
-    getCities(search,DisplayCityEnglish,DaysNumber);
+    if(CurrentLang=='en'){
+        getCities(search,DisplayCityEnglish,DaysNumber);
+    }
+    else{
+        getCities(search, DisplayCityArabic , DaysNumber);
+    }
+    
     SearchInput.value='';
 })
 
 SearchInput.addEventListener('input',function(){
     let search =SearchInput.value;
-    getCities(search,DisplayCityEnglish,DaysNumber);
+    if(CurrentLang=='en'){
+        getCities(search,DisplayCityEnglish,DaysNumber);
+    }
+    else{
+        getCities(search, DisplayCityArabic , DaysNumber);
+    }
 });
 
 
 
 let isArabic = false;
-getCities('Asyut', DisplayCityEnglish,3);
+getCities('Asyut', DisplayCityEnglish,DaysNumber);
 btn.addEventListener('click',function(e){
     isArabic = !isArabic;
     if (isArabic) 
     {
+        CurrentLang = 'ar';
+
+        for (let i = 0; i < 2; i++) {
+            ArabicStyle[i].classList.add('Arabic')
+            
+        }
         getCities('أسيوط', DisplayCityArabic,DaysNumber);
         SearchInput.placeholder='...اكتب اسم المدينة';
         Home.innerHTML="الرئيسية";
@@ -112,11 +145,18 @@ btn.addEventListener('click',function(e){
         Photos.innerHTML="صور";
         Contact.innerHTML="تواصل";
         weatherHourTitle.innerHTML="توقعات طقس اليوم";
-        weatherTitle.innerHTML="توقعات طقوس الأيام";
+        weatherTitle.innerHTML="توقعات طقس الأيام";
         Title.innerHTML="الطقس";
     } 
     else 
     {
+
+        CurrentLang = 'en';
+
+        for (let i = 0; i < 2; i++) {
+            ArabicStyle[i].classList.remove('Arabic')
+            
+        }
         getCities('Asyut', DisplayCityEnglish,DaysNumber);
         SearchInput.placeholder='Find Your Location...';
         Home.innerHTML='Home';
@@ -270,9 +310,9 @@ function DisplayCityArabic() {
                     <p class="today-weather-text text-info">${curruntCity.current.condition.text}</p>
                 </div>
                 <div class="weather-icon ps-5 pe-5 d-flex justify-content-between">
-                    <p><i class="fa-solid fa-water"></i> الرطوبة: ${curruntCity.forecast.forecastday[0].day.avghumidity}%</p> 
-                    <p><i class="fa-regular fa-compass"></i> الاتجاه: ${directions[curruntCity.current.wind_dir]}</p>
-                    <p><i class="fa-solid fa-wind"></i> الرياح: ${curruntCity.forecast.forecastday[0].day.maxwind_kph}كم/س</p>
+                    <p><i class="fa-solid fa-water"></i> ${curruntCity.forecast.forecastday[0].day.avghumidity}%</p> 
+                    <p><i class="fa-regular fa-compass"></i> ${directions[curruntCity.current.wind_dir]}</p>
+                    <p><i class="fa-solid fa-wind"></i> ${curruntCity.forecast.forecastday[0].day.maxwind_kph}كم/س</p>
                 </div>
             </div>
         </div>`;
@@ -297,8 +337,8 @@ function DisplayCityArabic() {
                     <p class="toworrow-weather-text text-info">${curruntCity.forecast.forecastday[i].day.condition.text}</p>
                 </div>
                 <div class="weather-icon ps-5 pe-5 d-flex justify-content-between">
-                    <p><i class="fa-solid fa-water"></i> الرطوبة: ${curruntCity.forecast.forecastday[i].day.avghumidity}%</p> 
-                    <p><i class="fa-solid fa-wind"></i> الرياح: ${curruntCity.forecast.forecastday[i].day.maxwind_kph}كم/س</p>
+                    <p><i class="fa-solid fa-water"></i> ${curruntCity.forecast.forecastday[i].day.avghumidity}%</p> 
+                    <p><i class="fa-solid fa-wind"></i> ${curruntCity.forecast.forecastday[i].day.maxwind_kph}كم/س</p>
                 </div>
             </div>
         </div>`;
