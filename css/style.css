@@ -157,6 +157,11 @@ form:hover {
 /* =========================================
    WEATHER CARDS
 ========================================= */
+.Arabic{
+  text-align: end;
+}
+
+
 .today,
 .tomorrow {
   height: 450px;
@@ -329,19 +334,6 @@ i {
   box-shadow: 0 0 10px rgba(0, 191, 255, 0.6);
   transform: scale(1.05);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
