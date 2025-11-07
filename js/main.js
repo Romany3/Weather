@@ -76,7 +76,7 @@ DisplayMore.addEventListener('click', () => {
         updateButtons();
     }
     else{
-        getCities('Asyut', DisplayCityArabic , DaysNumber);
+        getCities('أسيوط', DisplayCityArabic , DaysNumber);
         updateButtons();
     }
     
@@ -90,7 +90,7 @@ DisplayLess.addEventListener('click', () => {
         updateButtons();
     }
     else{
-        getCities('Asyut', DisplayCityArabic , DaysNumber);
+        getCities('أسيوط', DisplayCityArabic , DaysNumber);
         updateButtons();
     }
 });
@@ -346,3 +346,4 @@ function DisplayCityArabic() {
 
     show.innerHTML = cartona;
 }
+
