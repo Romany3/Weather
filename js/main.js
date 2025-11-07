@@ -2,6 +2,7 @@ let curruntCity = [];
 let show = document.querySelector('.weather .row');
 let SearchInput = document.querySelector('.SearchInput');
 let hour = document.querySelector('.weather-hour .row');
+let SearchButton = document.querySelector('.SearchButton');
 let btn = document.querySelectorAll('.translate');
 
 let Home = document.querySelector('.Home');
@@ -12,6 +13,29 @@ let Contact = document.querySelector('.Contact');
 let Title = document.querySelector('.Title');
 let weatherHourTitle = document.querySelector('.weather-hour-title');
 let weatherTitle = document.querySelector('.weather-title');
+let navbar = document.querySelector(".navbar");
+
+
+
+
+let previousScroll = window.scrollY;
+window.addEventListener("scroll", () => {
+  const currentScroll = window.scrollY;
+
+  if (currentScroll > previousScroll) 
+    {
+        navbar.classList.add("hidden-navbar");
+    } 
+  else 
+    {
+        navbar.classList.remove("hidden-navbar");
+    }
+
+  previousScroll = currentScroll;
+});
+
+
+
 
 // I searched of this
 hour.addEventListener("wheel", (e) => {
@@ -63,6 +87,14 @@ for(let i=0; i<btn.length; i++){
         
 }
 
+
+SearchButton.addEventListener('click',function(e){
+    e.preventDefault();
+
+    let search =SearchInput.value;
+    getCities(search,DisplayCityEnglish);
+    SearchInput.value='';
+})
 
 SearchInput.addEventListener('input',function(){
     let search =SearchInput.value;
