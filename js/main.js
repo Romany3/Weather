@@ -53,7 +53,7 @@ async function getCities(CityName,DisplayLang,DayNumber) {
     
     DisplayLang();
 };
-let CurrentLang = 'ar';
+let CurrentLang = 'en';
 let DaysNumber = 3;
 function updateButtons() {
     if (DaysNumber < 12) {
@@ -346,4 +346,5 @@ function DisplayCityArabic() {
 
     show.innerHTML = cartona;
 }
+
 
